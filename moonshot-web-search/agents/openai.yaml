@@ -1,0 +1,4 @@
+interface:
+  display_name: "Moonshot Search"
+  short_description: "Search the web with Moonshot via a bundled shell tool"
+  default_prompt: "Use $moonshot-web-search to search the web with Moonshot and summarize the results."
