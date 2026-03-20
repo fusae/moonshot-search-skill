@@ -27,10 +27,11 @@ Run a bundled shell script that calls Moonshot's builtin `"$web_search"` tool in
 1. Resolve `SKILL_DIR` as the directory containing this `SKILL.md`.
 2. Check that `MOONSHOT_API_KEY` is set before running the script. If it is missing, tell the user they need to provide a valid Moonshot API key in the environment.
 3. Extract a clean search request from the user's prompt. Preserve concrete constraints such as time range, geography, language, and output format.
-4. Run:
+4. Run the script with an already-resolved absolute path. Do not rely on a temporary env assignment like `SKILL_DIR=... bash "$SKILL_DIR/scripts/search.sh"` because many shells expand `"$SKILL_DIR"` before the temporary assignment takes effect.
 
 ```bash
-bash "${SKILL_DIR}/scripts/search.sh" "<query>"
+SCRIPT_PATH="${SKILL_DIR}/scripts/search.sh"
+bash "$SCRIPT_PATH" "<query>"
 ```
 
 5. Return the script output to the user in the requested style. If the user asked for a short answer, compress it after reading the result.
@@ -47,3 +48,4 @@ bash "${SKILL_DIR}/scripts/search.sh" "<query>"
 - If `curl` returns HTTP `429`, tell the user the Moonshot account is being rate limited and retry later.
 - If the first round does not return `tool_calls`, surface the error text from the script.
 - If the second round returns no content, report the script error rather than guessing.
+- If a shell error says `/scripts/search.sh: No such file or directory`, the runner probably expanded `$SKILL_DIR` before assigning it. Resolve the absolute script path first, then execute it.
