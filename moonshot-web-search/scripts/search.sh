@@ -1,8 +1,13 @@
 #!/bin/bash
 set -euo pipefail
 
-API_KEY="${MOONSHOT_API_KEY:?请设置 MOONSHOT_API_KEY 环境变量}"
+API_KEY="${MOONSHOT_API_KEY:-}"
 QUERY="$*"
+
+if [ -z "$API_KEY" ]; then
+  echo "请设置 MOONSHOT_API_KEY 环境变量" >&2
+  exit 1
+fi
 
 if [ -z "$QUERY" ]; then
   echo "Usage: $0 <query>"
