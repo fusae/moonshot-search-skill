@@ -1,6 +1,17 @@
 ---
 name: moonshot-web-search
 description: Search the live web through Moonshot's builtin $web_search tool and return a concise answer. Use when the user asks to search the web, look something up online, verify current information, or summarize recent web findings with Moonshot. Use this for fast web-backed answers when direct browser-style source extraction is not required.
+metadata:
+  openclaw:
+    primaryEnv: MOONSHOT_API_KEY
+    homepage: https://github.com/fusae/moonshot-search-skill
+    requires:
+      env:
+        - MOONSHOT_API_KEY
+      bins:
+        - bash
+        - curl
+        - python3
 ---
 
 # Moonshot Web Search
