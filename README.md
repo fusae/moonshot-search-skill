@@ -46,6 +46,16 @@ Export your Moonshot key before using the skill:
 export MOONSHOT_API_KEY="your-api-key"
 ```
 
+## OpenClaw Routing Recommendation
+
+If OpenClaw sometimes uses its own builtin `web_search` instead of this skill, add a routing rule to OpenClaw's own `TOOLS.md` so live web search prefers `moonshot-web-search` and does not call builtin `web_search` directly.
+
+Suggested wording:
+
+```md
+For live web search, current-information lookup, and online verification, always prefer the `moonshot-web-search` skill. Do not call builtin `web_search` directly for those tasks.
+```
+
 ## Local Test
 
 Run the bundled script directly:
